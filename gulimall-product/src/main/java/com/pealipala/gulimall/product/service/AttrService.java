@@ -6,6 +6,7 @@ import com.pealipala.gulimall.product.entity.AttrEntity;
 import com.pealipala.gulimall.product.vo.AttrRespVo;
 import com.pealipala.gulimall.product.vo.AttrVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,10 +22,14 @@ public interface AttrService extends IService<AttrEntity> {
 
     void saveAttr(AttrVo attrVo);
 
-    PageUtils querybaseAttrPage(Map<String, Object> params, Long catelogId);
+    PageUtils querybaseAttrPage(Map<String, Object> params, Long catelogId, String type);
 
     AttrRespVo getAttrInfo(Long attrId);
 
     void updateAttr(AttrVo attr);
+
+    List<AttrEntity> getAttrRelation(Long attrgroupId);
+
+    PageUtils getAttrNoRelation(Map<String, Object> params, Long attrgroupId);
 }
 

@@ -17,8 +17,8 @@ class GulimallThirdPartyApplicationTests {
 
     @Test
     void contextLoads() throws FileNotFoundException {
-        InputStream inputStream = new FileInputStream("C:\\Users\\pealipala\\Downloads\\1591286266(1).png");
-        ossClient.putObject("gulimall-pealipala","TEST1.png",inputStream);
+        InputStream inputStream = new FileInputStream("C:\\Users\\pealipala\\Downloads\\suo.png");
+        ossClient.putObject("pealipala-mail","TEST1.png",inputStream);
         ossClient.shutdown();
         System.out.println("1");
     }
