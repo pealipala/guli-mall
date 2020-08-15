@@ -11,6 +11,7 @@ import com.pealipala.gulimall.product.service.AttrAttrgroupRelationService;
 import com.pealipala.gulimall.product.service.AttrService;
 import com.pealipala.gulimall.product.service.CategoryService;
 import com.pealipala.gulimall.product.vo.AttrGroupRelationVo;
+import com.pealipala.gulimall.product.vo.AttrGroupWithAttrVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,12 @@ public class AttrGroupController {
     private AttrService attrService;
     @Autowired
     private AttrAttrgroupRelationService attrAttrgroupRelationService;
+
+    @GetMapping("/{catelogId}/withattr")
+    public R getAttrGroupWithAttrs(@PathVariable Long catelogId){
+        List<AttrGroupWithAttrVo> vos = attrGroupService.getAttrGroupWithAttrsByCatelogId(catelogId);
+        return R.ok().put("data", vos);
+    }
 
     @PostMapping("/attr/relation")
     public R addRelation(@RequestBody List<AttrGroupRelationVo> vos){

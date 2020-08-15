@@ -3,9 +3,13 @@ package com.pealipala.gulimall.product.controller;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.pealipala.gulimall.product.entity.BrandEntity;
+import com.pealipala.gulimall.product.vo.BrandVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +33,25 @@ public class CategoryBrandRelationController {
     private CategoryBrandRelationService categoryBrandRelationService;
 
     /**
+     * @return 返回分类下面的品牌
+     * @Param
+     */
+    @GetMapping("/brands/list")
+    public R relationBrandList(@RequestParam(name = "catId", required = true) Long catId) {
+        List<BrandEntity> brandList = categoryBrandRelationService.getRelationBrandList(catId);
+        if (brandList != null) {
+            List<BrandVo> brandVos = brandList.stream().map((item) -> {
+                BrandVo vo = new BrandVo();
+                vo.setBrandId(item.getBrandId());
+                vo.setBrandName(item.getName());
+                return vo;
+            }).collect(Collectors.toList());
+            return R.ok().put("data", brandVos);
+        }
+        return R.ok().put("data", null);
+    }
+
+    /**
      * @方法名称
      * @功能描述 <pre>获取当前品牌所有分类列表</pre>
      * @作者 yechaoze yechaoze@tansun.com.cn
@@ -39,7 +62,7 @@ public class CategoryBrandRelationController {
     //@RequiresPermissions("product:categorybrandrelation:list")
     public R catelogList(@RequestParam("brandId") Long brandId) {
         List<CategoryBrandRelationEntity> data = categoryBrandRelationService.list(
-                new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId));
+                new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId));
         return R.ok().put("data", data);
     }
 
