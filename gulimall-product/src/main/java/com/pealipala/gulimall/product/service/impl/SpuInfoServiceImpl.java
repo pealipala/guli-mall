@@ -66,7 +66,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         //2.保存spu描述图片 pms_spu_info_desc
         List<String> decript = vo.getDecript();
         SpuInfoDescEntity infoDescEntity = new SpuInfoDescEntity();
-        infoDescEntity.setSpuId(infoDescEntity.getSpuId());
+        infoDescEntity.setSpuId(infoEntity.getId());
         infoDescEntity.setDecript(String.join(",",decript));
         descService.saveSpuInfoDesc(infoDescEntity);
         //3.保存spu图片集  pms_spu_images
