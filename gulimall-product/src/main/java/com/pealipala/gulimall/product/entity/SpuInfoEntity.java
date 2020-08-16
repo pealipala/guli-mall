@@ -24,7 +24,7 @@ public class SpuInfoEntity implements Serializable {
 	/**
 	 * 商品id
 	 */
-	@TableId(type = IdType.INPUT)
+	@TableId
 	private Long id;
 	/**
 	 * 商品名称
