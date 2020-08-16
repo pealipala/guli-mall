@@ -3,7 +3,10 @@ package com.pealipala.gulimall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.pealipala.common.utils.PageUtils;
 import com.pealipala.gulimall.product.entity.SkuInfoEntity;
+import com.pealipala.gulimall.product.entity.SpuInfoEntity;
+import com.pealipala.gulimall.product.vo.Skus;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +19,7 @@ import java.util.Map;
 public interface SkuInfoService extends IService<SkuInfoEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void saveSkuInfo(SkuInfoEntity entity);
 }
 
