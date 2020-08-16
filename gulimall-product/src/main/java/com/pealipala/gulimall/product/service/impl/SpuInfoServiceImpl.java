@@ -23,6 +23,7 @@ import com.pealipala.common.utils.PageUtils;
 import com.pealipala.common.utils.Query;
 
 import com.pealipala.gulimall.product.dao.SpuInfoDao;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("spuInfoService")
@@ -53,7 +54,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         return new PageUtils(page);
     }
 
-    //@Transactional
+    @Transactional
     @Override
     public void saveSpuInfo(SpuSaveVo vo) {
         //1.保存spu基本信息 pms_spu_info
