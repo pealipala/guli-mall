@@ -19,6 +19,15 @@ public class PurchaseDetailServiceImpl extends ServiceImpl<PurchaseDetailDao, Pu
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+        IPage<PurchaseDetailEntity> page = this.page(
+                new Query<PurchaseDetailEntity>().getPage(params),new QueryWrapper<>()
+        );
+
+        return new PageUtils(page);
+    }
+
+    @Override
+    public PageUtils queryPageByCondition(Map<String, Object> params) {
         QueryWrapper<PurchaseDetailEntity> queryWrapper = new QueryWrapper<>();
         String key = (String) params.get("key");
         String status = (String) params.get("status");
@@ -39,11 +48,6 @@ public class PurchaseDetailServiceImpl extends ServiceImpl<PurchaseDetailDao, Pu
         );
 
         return new PageUtils(page);
-    }
-
-    @Override
-    public PageUtils queryPageByCondition(Map<String, Object> params) {
-        return null;
     }
 
 }
