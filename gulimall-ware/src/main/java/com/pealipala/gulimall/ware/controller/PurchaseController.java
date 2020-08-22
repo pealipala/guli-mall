@@ -2,6 +2,7 @@ package com.pealipala.gulimall.ware.controller;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -28,6 +29,16 @@ import com.pealipala.common.utils.R;
 public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
+    /**
+      * @Param 领取采购单
+      * @return /ware/purchase/received
+      */
+    @PostMapping("/received")
+    public R received(@RequestBody List<Long> ids){
+        purchaseService.receivedPurchase(ids);
+
+        return R.ok();
+    }
 
     //ware/purchase/merge
     @PostMapping("/merge")
