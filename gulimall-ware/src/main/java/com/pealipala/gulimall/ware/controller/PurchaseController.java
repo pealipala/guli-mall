@@ -7,6 +7,7 @@ import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.pealipala.gulimall.ware.vo.MergeVo;
+import com.pealipala.gulimall.ware.vo.PurchaseDoneVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,13 @@ import com.pealipala.common.utils.R;
 public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
+
+    @PostMapping("/done")
+    public R finish(@RequestBody PurchaseDoneVo doneVo){
+        purchaseService.finishPurchase(doneVo);
+
+        return R.ok();
+    }
     /**
       * @Param 领取采购单
       * @return /ware/purchase/received
