@@ -1,17 +1,16 @@
 package com.pealipala.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.pealipala.gulimall.product.entity.ProductAttrValueEntity;
+import com.pealipala.gulimall.product.service.ProductAttrValueService;
 import com.pealipala.gulimall.product.vo.AttrRespVo;
 import com.pealipala.gulimall.product.vo.AttrVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.pealipala.gulimall.product.entity.AttrEntity;
 import com.pealipala.gulimall.product.service.AttrService;
@@ -32,6 +31,24 @@ import com.pealipala.common.utils.R;
 public class AttrController {
     @Autowired
     private AttrService attrService;
+    @Autowired
+    private ProductAttrValueService productAttrValueService;
+
+    //product/attr/update/{spuId}
+    @PostMapping("/update/{spuId}")
+    public R updateSpu(@PathVariable("spuId") Long spuId,List<ProductAttrValueEntity> entities){
+        productAttrValueService.updateSpu(spuId,entities);
+
+        return R.ok();
+    }
+
+    //product/attr/base/listforspu/{spuId}
+    @RequestMapping("/base/listforspu/{spuId}")
+    public R listForSpu(@PathVariable("spuId") Long spuId){
+        List<ProductAttrValueEntity> result = productAttrValueService.listForSpu(spuId);
+
+        return R.ok().put("data", result);
+    }
 
     /**
      * 列表
